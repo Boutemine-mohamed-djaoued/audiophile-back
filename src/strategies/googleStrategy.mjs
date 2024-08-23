@@ -26,6 +26,7 @@ passport.use(
     async function (accessToken, refreshToken, profile, done) {
       try {
         let user = await User.findOne({ googleId: profile.id });
+        console.log({ user });
         if (!user) {
           const cart = new Cart();
           user = new User({
@@ -38,6 +39,7 @@ passport.use(
           await cart.save();
           await user.save();
         }
+        console.log({ user });
         done(null, user);
       } catch (err) {
         done(err, null);
