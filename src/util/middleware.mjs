@@ -1,4 +1,6 @@
 export const logedInMiddleware = (req, res, next) => {
+  console.log(req.user);
+  console.log(req.isAuthenticated());
   if (!req.isAuthenticated()) {
     return res.status(401).send("Not Authorized");
   }
