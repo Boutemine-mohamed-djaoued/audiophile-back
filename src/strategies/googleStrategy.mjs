@@ -25,6 +25,7 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, done) {
       try {
+        console.log("Google profile:", profile); // Log profile information
         let user = await User.findOne({ googleId: profile.id });
         if (!user) {
           const cart = new Cart();
@@ -40,6 +41,7 @@ passport.use(
         }
         done(null, user);
       } catch (err) {
+        console.error("Error during Google authentication:", err); // Log error
         done(err, null);
       }
     }
