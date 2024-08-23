@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
-import { User } from "../models/user.mjs";
 import { Cart } from "../models/cart.mjs";
+import { User } from "../models/user.mjs";
 passport.serializeUser(function (user, done) {
   done(null, user._id);
 });
@@ -21,9 +21,9 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:4000/user/google/callback",
+      callbackURL: "https://audiophile-back-20jv.onrender.com/user/google/callback",
     },
-    async function (accessToken, refreshToken,profile, done) {
+    async function (accessToken, refreshToken, profile, done) {
       try {
         let user = await User.findOne({ googleId: profile.id });
         if (!user) {
